@@ -4,7 +4,7 @@ import machine
 from  machine import Timer
 
 tim = Timer(-1)
-p0 = machine.Pin(2, machine.Pin.IN)     # create input pin on GPIO2
+p0 = machine.Pin(2, machine.Pin.IN)     # create input pin on D4 on nodeMcu
 
 
 def func(t):
