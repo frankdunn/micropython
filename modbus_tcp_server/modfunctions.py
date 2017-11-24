@@ -10,8 +10,21 @@ def split_int(x):
 
 def join_bytes(y2,y1):
 		return((y2<<8) + y1)
-		
-		
+
+def check_regs(func_num,start,end):
+        if func_num == 3:
+        
+                if (end - start) == len(holdings[start:end]):
+                        print("no error")
+                        print("end - start :"+ str(end - start) + " len :" + str(len(holdings[start:end])))
+
+                else:
+                        print("error")
+                        print("end - start :"+ str(end - start) + " len :" + str(len(holdings[start:end])))
+        else:
+                pass
+                
+                        
 def assemble_header(rx_data,tx_data):
         return (rx_data[0:5] + bytes([len(tx_data)])) #6: assemble header
         
@@ -26,7 +39,8 @@ def func_03(rx_data):
         start_holding = rx_data[9]
         number_holdings = rx_data[11]
         end_holding = start_holding + number_holdings
-        tx_data = []                                            #1: check for errors &clear tx data
+        tx_data = []
+        check_regs(3,start_holding,end_holding)                 #1: check for errors &clear tx data
         tx_data = (bytes([slave_id])+ b'\x03')                  #2: add slave id + function code
         tx_data = (tx_data + bytes([number_holdings*2]))        #3: add number of bytes to follow
         for i in range(start_holding,end_holding):              #5: add requested holding registers
